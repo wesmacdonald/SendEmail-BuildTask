@@ -1,0 +1,160 @@
+{
+    "$schema": "https://raw.githubusercontent.com/Microsoft/azure-pipelines-task-lib/master/tasks.schema.json",
+    "id": "f2492fe5-c031-44a8-a5b4-8d165b02f913",
+    "name": "SendEmail",
+    "friendlyName": "#{PrivatePublicExtension}#Send email using Microsoft 365 Graph API",
+    "description": "Send an email to 1 or more addresses via Microsoft 365 Graph API",
+    "helpMarkDown": "Version: #{PrivatePublicExtension}##{Build.BuildNumber}#. [More information](https://github.com/renevanosnabrugge)",
+    "category": "Utility",
+    "author": "Rene van Osnabrugge",
+    "version": {
+      "Major": 3,
+      "Minor": 0,
+      "Patch": 0
+    },
+    "visibility": [
+      "Build",
+      "Release"
+    ],
+    "demands": [
+      "npm"
+    ],
+    "minimumAgentVersion": "2.209.0",
+    "groups": [
+        {
+        "name": "mailsettings",
+        "displayName": "Email settings",
+        "isExpanded": true
+        },
+        {
+        "name": "graphapisettings",
+        "displayName": "Microsoft 365 Graph API Settings",
+        "isExpanded": true
+        }
+    ],
+     "inputs": [
+      {
+        "name": "To",
+        "type": "string",
+        "label": "To Addresses",
+        "defaultValue": "",
+        "required": true,
+        "groupName": "mailsettings",
+        "helpMarkDown": "To Addresses. Separated by comma (,)"
+      },
+      {
+        "name": "CC",
+        "type": "string",
+        "label": "CC Addresses",
+        "defaultValue": "",
+        "required": false,
+        "groupName": "mailsettings",
+        "helpMarkDown": "CC Addresses. Separated by comma (,)"
+      },
+      {
+        "name": "BCC",
+        "type": "string",
+        "label": "BCC Addresses",
+        "defaultValue": "",
+        "required": false,
+        "groupName": "mailsettings",
+        "helpMarkDown": "BCC Addresses. Separated by comma (,)"
+      },
+      {
+        "name": "From",
+        "type": "string",
+        "label": "From Address",
+        "defaultValue": "",
+        "required": true,
+        "groupName": "mailsettings",
+        "helpMarkDown": "From Address (must be a user with a mailbox in your Microsoft 365 tenant)"
+      },
+      {
+        "name": "Subject",
+        "type": "string",
+        "label": "Mail Subject",
+        "defaultValue": "",
+        "required": true,
+        "groupName": "mailsettings",
+        "helpMarkDown": "The subject of the email"  
+      },
+      {
+        "name": "Body",
+        "type": "multiLine",
+        "label": "Mail Body",
+        "defaultValue": "",
+        "required": false,
+        "groupName": "mailsettings",
+        "helpMarkDown": "The body of the email",
+        "properties": {
+          "resizable": true,
+          "rows" : "20"
+        }  
+      },
+      {
+        "name": "BodyAsHtml",
+        "type": "boolean",
+        "label": "Is HTML Body?:",
+        "defaultValue": "false",
+        "required": true,
+        "groupName": "mailsettings",
+        "helpMarkDown": "Indicate if the text in the Body is HTML formatted"
+      },
+      {
+        "name": "AddAttachment",
+        "type": "boolean",
+        "label": "Add Attachment?:",
+        "defaultValue": "false",
+        "required": true,
+        "groupName": "mailsettings",
+        "helpMarkDown": "Indicate if a file will be attached to the email"
+      },
+      {
+        "name": "Attachment",
+        "type": "string",
+        "label": "Attachment (absolute path)",
+        "defaultValue": "",
+        "required": false,
+        "groupName": "mailsettings",
+        "helpMarkDown": "The absolute path to the file"  
+      },
+      {
+        "name": "AppId",
+        "type": "string",
+        "label": "Microsoft 365 App ID",
+        "defaultValue": "",
+        "required": true,
+        "groupName": "graphapisettings",
+        "helpMarkDown": "App ID (Client ID) of the Azure AD app registration with Mail.Send permissions"
+      },
+      {
+        "name": "ClientSecret",
+        "type": "string",
+        "label": "Client Secret",
+        "defaultValue": "",
+        "required": true,
+        "groupName": "graphapisettings",
+        "helpMarkDown": "Client Secret for the Azure AD app registration"
+      },
+      {
+        "name": "TenantId",
+        "type": "string",
+        "label": "Tenant ID",
+        "defaultValue": "",
+        "required": true,
+        "groupName": "graphapisettings",
+        "helpMarkDown": "Azure AD Tenant ID"
+      }
+    ],
+    "instanceNameFormat": "Send an email with subject $(Subject) using Graph API",
+    "execution": {
+      "Node16": {
+        "target": "index.js",
+        "platform": "linux, macos, windows"
+      },
+      "Node20_1": {
+        "target": "index.js",
+        "platform": "linux, macos, windows"
+      }
+    }
+  }

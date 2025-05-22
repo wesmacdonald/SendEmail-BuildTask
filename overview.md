@@ -3,7 +3,10 @@ This extension takes care of sending email within your build or release pipeline
 
 ##What can you do
 * Send email to 1 or more addresses (To, CC and BCC)
-* Configure a SMTP server 
+* Configure a SMTP server (v1, v2)
+* Use Microsoft 365 Graph API to send emails (v3)
+
+05-22-2023 Version 3 of the task has been created using Microsoft 365 Graph API. This allows sending emails using Azure AD app authentication.
 
 10-02-2025 Version 2 of the task has been created using Node. Added tests as well to support success/failure validation.
 
