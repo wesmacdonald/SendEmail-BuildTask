@@ -7,11 +7,11 @@ import 'isomorphic-fetch';
 // Required for Microsoft Graph Client
 require('isomorphic-fetch');
 
-function isNullOrEmpty(str: string | null | undefined): boolean {
+export function isNullOrEmpty(str: string | null | undefined): boolean {
     return str === null || str === undefined || str.trim() === '';
 }
 
-async function getAuthToken(clientId: string, clientSecret: string, tenantId: string): Promise<string> {
+export async function getAuthToken(clientId: string, clientSecret: string, tenantId: string): Promise<string> {
     const tokenEndpoint = `https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/token`;
     
     const data = new URLSearchParams();
@@ -42,7 +42,7 @@ async function getAuthToken(clientId: string, clientSecret: string, tenantId: st
     }
 }
 
-async function createGraphClient(accessToken: string): Promise<Client> {
+export async function createGraphClient(accessToken: string): Promise<Client> {
     return Client.init({
         authProvider: (done) => {
             done(null, accessToken);
@@ -50,7 +50,7 @@ async function createGraphClient(accessToken: string): Promise<Client> {
     });
 }
 
-async function run() {
+export async function run() {
     try {
         const To: string | undefined = tl.getInputRequired('To');
         const Subject: string | undefined = tl.getInputRequired('Subject');
